@@ -1,4 +1,14 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  --color-active: #4EAC6D;
+}
+body[data-theme="dark"] {}
+body[data-theme="light"] {
+  --color-text: #495057;
+  --color-sub-text: #797C8C;
 }
