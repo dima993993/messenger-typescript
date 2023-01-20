@@ -54,6 +54,7 @@ interface FormProps {
   title: string;
   subTitle: string;
   textLink: string;
+  handleClick: (email: string, password: string) => void
 }
 
 const Form: FC<FormProps> = ({
@@ -63,6 +64,7 @@ const Form: FC<FormProps> = ({
   title,
   subTitle,
   textLink,
+  handleClick,
 }) => {
   return (
     <WrapperForm>

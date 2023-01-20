@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 
 const WrapperField = styled.div`
@@ -25,7 +25,6 @@ interface FieldProps {
 
 const Field: FC<FieldProps> = ({ name, type }) => {
   const [textField, setTextField] = useState("");
-  console.log(textField);
   return (
     <WrapperField>
       <div>

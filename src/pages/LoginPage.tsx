@@ -1,3 +1,4 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Form from "../components/auth/Form";
 
 const inputs = [
@@ -6,6 +7,13 @@ const inputs = [
 ];
 
 const LoginPage = () => {
+  const handleLogin = (email: string, password: string) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(console.log)
+      .catch(console.error);
+  };
+
   return (
     <div>
       <Form
@@ -15,6 +23,7 @@ const LoginPage = () => {
         nameLink='Register'
         subTitle='Sign in to continue'
         textLink="Don't have an account?"
+        handleCLick={handleLogin}
       />
     </div>
   );
