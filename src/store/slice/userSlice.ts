@@ -4,8 +4,6 @@ const initialState = {
     email: null,
     token: null,
     id: null,
-    name: null,
-    surname: null,
 }
 const userSlice = createSlice({
     name: "user",

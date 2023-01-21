@@ -1,8 +1,8 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Form from "../components/auth/Form";
 import { useAppDispatch } from "../hooks/redux-hooks";
 import { setUser } from "../store/slice/userSlice";
+import Form from "../components/auth/Form";
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
