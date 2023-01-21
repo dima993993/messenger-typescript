@@ -21,22 +21,23 @@ const WrapperField = styled.div`
 interface FieldProps {
   name: string;
   type: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Field: FC<FieldProps> = ({ name, type }) => {
-  const [textField, setTextField] = useState("");
+const Field: FC<FieldProps> = ({ name, type, value, setValue }) => {
   return (
     <WrapperField>
       <div>
-        <div className='label_block'>
+        <div className="label_block">
           <h4>{name}</h4>
         </div>
-        <div className='input_block'>
+        <div className="input_block">
           <input
             type={type}
             placeholder={name}
-            value={textField}
-            onChange={(e) => setTextField(e.target.value)}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
         </div>
       </div>

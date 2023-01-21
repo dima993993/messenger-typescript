@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { ArrayInputs } from "../../types/types";
+import { FC, useState } from "react";
 import Field from "./Field";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const WrapperForm = styled.div`
   background-color: var(--color-active);
@@ -35,30 +35,23 @@ const WrapperForm = styled.div`
       text-align: center;
       button {
         width: 300px;
-        padding: 10px;
-        background-color: var(--color-active);
-        color: #ffffff;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        margin: 20px 0;
+        padding: 8px;
+        margin: 10px 0;
       }
     }
   }
 `;
 
 interface FormProps {
-  inputs: ArrayInputs;
   path: string;
   nameLink: string;
   title: string;
   subTitle: string;
   textLink: string;
-  handleClick: (email: string, password: string) => void
+  handleClick: (email: string, password: string) => void;
 }
 
 const Form: FC<FormProps> = ({
-  inputs,
   path,
   nameLink,
   title,
@@ -66,27 +59,57 @@ const Form: FC<FormProps> = ({
   textLink,
   handleClick,
 }) => {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   return (
     <WrapperForm>
       <div>
-        <div className='title'>
+        <div className="title">
           <h2>{title}</h2>
           <p>{subTitle}</p>
         </div>
-        <div className='inputs'>
-          {inputs.map((input) => (
-            <Field key={input.name} name={input.name} type={input.type} />
-          ))}
+        <div className="inputs">
+          {title === "Register" && (
+            <div>
+              <Field name="Name" type="text" value={name} setValue={setName} />
+              <Field
+                name="Surname"
+                type="text"
+                value={surname}
+                setValue={setSurname}
+              />
+            </div>
+          )}
+          <Field name="Email" type="text" value={email} setValue={setEmail} />
+          <Field
+            name="Password"
+            type="password"
+            value={pass}
+            setValue={setPass}
+          />
         </div>
-        <div className='btn_block'>
+        <div className="btn_block">
           <div>
-            <button>{title}</button>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "var(--color-active)" }}
+              onClick={() => handleClick(email, pass)}
+            >
+              {title}
+            </Button>
           </div>
           <div>
-            <div>Sign in with</div>
-            <div>
-              <button>Google</button>
-            </div>
+            <Button
+              variant="outlined"
+              style={{
+                borderColor: "var(--color-active)",
+                color: "var(--color-active)",
+              }}
+            >
+              Google
+            </Button>
           </div>
           <div>
             {textLink}
