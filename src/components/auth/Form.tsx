@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
-import Field from "./Field";
-import styled from "styled-components";
+import { useAuthorization } from "../../hooks/auth-user";
 import { NavLink } from "react-router-dom";
 import { Button } from "@mui/material";
+import Field from "./Field";
+import styled from "styled-components";
 
 const WrapperForm = styled.div`
   background-color: var(--color-active);
@@ -63,6 +64,8 @@ const Form: FC<FormProps> = ({
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
+
+  const { googleAuth } = useAuthorization();
   return (
     <WrapperForm>
       <div>
@@ -107,6 +110,7 @@ const Form: FC<FormProps> = ({
                 borderColor: "var(--color-active)",
                 color: "var(--color-active)",
               }}
+              onClick={googleAuth}
             >
               Google
             </Button>

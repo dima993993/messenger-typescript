@@ -1,31 +1,8 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useAuthorization } from "../hooks/auth-user";
 import Form from "../components/auth/Form";
-import { useAppDispatch } from "../hooks/redux-hooks";
-import { setUser } from "../store/slice/userSlice";
 
 const LoginPage = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const handleLogin = (email: string, password: string) => {
-    const auth = getAuth();
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        console.log(user);
-
-        dispatch(
-          setUser({
-            email: user.email,
-            token: user.refreshToken,
-            id: user.uid,
-          })
-        );
-        navigate("/");
-      })
-      .catch(console.error);
-  };
-
+  const { handleLogin } = useAuthorization();
   return (
     <div>
       <Form

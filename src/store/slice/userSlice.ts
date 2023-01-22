@@ -4,6 +4,8 @@ const initialState = {
     email: null,
     token: null,
     id: null,
+    displayName: null,
+    photoURL: null,
 }
 const userSlice = createSlice({
     name: "user",
