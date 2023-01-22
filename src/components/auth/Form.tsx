@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useAuthorization } from "../../hooks/auth-user";
+import { useField } from "../../hooks/validation";
 import { NavLink } from "react-router-dom";
 import { Button } from "@mui/material";
 import Field from "./Field";
@@ -40,6 +41,9 @@ const WrapperForm = styled.div`
         margin: 10px 0;
       }
     }
+    .disabled {
+      cursor: not-allowed;
+    }
   }
 `;
 
@@ -60,12 +64,28 @@ const Form: FC<FormProps> = ({
   textLink,
   handleClick,
 }) => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const email = useField("", {
+    isEmpty: true,
+    minLength: 5,
+    maxLength: 25,
+    isEmail: false,
+    isValid: false,
+  });
+  const password = useField("", {
+    isEmpty: true,
+    minLength: 5,
+    maxLength: 12,
+    isValid: false,
+  });
+  const fullName = useField("", {
+    isEmpty: true,
+    minLength: 3,
+    maxLength: 25,
+  });
 
   const { googleAuth } = useAuthorization();
+  console.log(email, password);
+
   return (
     <WrapperForm>
       <div>
@@ -73,32 +93,29 @@ const Form: FC<FormProps> = ({
           <h2>{title}</h2>
           <p>{subTitle}</p>
         </div>
+        <div className="error_auth"></div>
         <div className="inputs">
           {title === "Register" && (
             <div>
-              <Field name="Name" type="text" value={name} setValue={setName} />
-              <Field
-                name="Surname"
-                type="text"
-                value={surname}
-                setValue={setSurname}
-              />
+              <Field name="Full Name" type="text" allSettings={fullName} />
             </div>
           )}
-          <Field name="Email" type="text" value={email} setValue={setEmail} />
-          <Field
-            name="Password"
-            type="password"
-            value={pass}
-            setValue={setPass}
-          />
+          <Field name="Email" type="text" allSettings={email} />
+          <Field name="Password" type="password" allSettings={password} />
         </div>
         <div className="btn_block">
-          <div>
+          <div
+            className={
+              !(email.validInput && password.validInput) ? "disabled" : ""
+            }
+          >
             <Button
               variant="contained"
-              style={{ backgroundColor: "var(--color-active)" }}
-              onClick={() => handleClick(email, pass)}
+              style={{
+                backgroundColor: "var(--color-active)",
+              }}
+              onClick={() => handleClick(email.value, password.value)}
+              disabled={!(email.validInput && password.validInput)}
             >
               {title}
             </Button>

@@ -1,5 +1,18 @@
-export interface Iinputs {
-    type: string;
-    name: string;
+export type RulesValidation = {
+    isEmpty: boolean,
+    isEmail?: boolean,
+    minLength: number,
+    maxLength: number,
+    isValid?: boolean,
 }
-export type ArrayInputs = Array<Iinputs>
+export type SettingsField = {
+    emailError: boolean,
+    isDirty: boolean,
+    isEmpty: boolean,
+    maxLengthError: boolean,
+    minLengthError: boolean,
+    value: string,
+    onBlur: () => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeError: (nameField: string, allSettings: SettingsField) => string;
+}

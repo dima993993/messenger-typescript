@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
+import { SettingsField } from "../../types/types";
 
 const WrapperField = styled.div`
   .input_block {
@@ -16,28 +17,47 @@ const WrapperField = styled.div`
   .label_block {
     color: var(--color-text);
   }
+  .error {
+    color: red;
+    font-size: 12px;
+    height: 12px;
+  }
+  .error_input {
+    border: 1px solid #ff0000 !important;
+  }
+  .correct_input {
+    border: 1px solid #cccccc !important;
+  }
 `;
 
 interface FieldProps {
   name: string;
   type: string;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  allSettings: SettingsField;
 }
 
-const Field: FC<FieldProps> = ({ name, type, value, setValue }) => {
+const Field: FC<FieldProps> = ({ name, type, allSettings }) => {
   return (
     <WrapperField>
       <div>
         <div className="label_block">
           <h4>{name}</h4>
         </div>
+        <div className="error">
+          {allSettings.isDirty && allSettings.changeError(name, allSettings)}
+        </div>
         <div className="input_block">
           <input
+            className={
+              allSettings.isDirty && allSettings.changeError(name, allSettings)
+                ? "error_input"
+                : "correct_input"
+            }
             type={type}
             placeholder={name}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            value={allSettings.value}
+            onChange={(e) => allSettings.onChange(e)}
+            onBlur={() => allSettings.onBlur()}
           />
         </div>
       </div>
