@@ -3,8 +3,10 @@ import { useAuthorization } from "../../hooks/auth-user";
 import { useField } from "../../hooks/validation";
 import { NavLink } from "react-router-dom";
 import { Button } from "@mui/material";
-import Field from "./Field";
+import authImg from "./../../images/authImg.png";
 import styled from "styled-components";
+import TitleBlock from "./TitleBlock";
+import InputsBlock from "./InputsBlock";
 
 const WrapperForm = styled.div`
   background-color: var(--color-active);
@@ -12,27 +14,12 @@ const WrapperForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
   & > div {
     background-color: #ffffff;
     border-radius: 20px;
     padding: 40px;
     width: 50%;
-    .title {
-      text-align: center;
-      h2 {
-        font-size: 30px;
-        color: var(--color-text);
-      }
-      p {
-        margin-top: 10px;
-        font-size: 14px;
-        color: var(--color-sub-text);
-      }
-    }
-    .inputs {
-      margin: 60px auto 0px auto;
-      width: 300px;
-    }
     .btn_block {
       text-align: center;
       button {
@@ -43,6 +30,13 @@ const WrapperForm = styled.div`
     }
     .disabled {
       cursor: not-allowed;
+    }
+  }
+  .img_block {
+    background-color: transparent;
+    width: 300px;
+    img {
+      width: 100%;
     }
   }
 `;
@@ -84,25 +78,22 @@ const Form: FC<FormProps> = ({
   });
 
   const { googleAuth } = useAuthorization();
-  console.log(email, password);
+  console.log(email);
 
   return (
     <WrapperForm>
+      <div className="img_block">
+        <img src={authImg} alt="Doot" />
+      </div>
       <div>
-        <div className="title">
-          <h2>{title}</h2>
-          <p>{subTitle}</p>
-        </div>
+        <TitleBlock title={title} subTitle={subTitle} />
         <div className="error_auth"></div>
-        <div className="inputs">
-          {title === "Register" && (
-            <div>
-              <Field name="Full Name" type="text" allSettings={fullName} />
-            </div>
-          )}
-          <Field name="Email" type="text" allSettings={email} />
-          <Field name="Password" type="password" allSettings={password} />
-        </div>
+        <InputsBlock
+          title={title}
+          fullName={fullName}
+          email={email}
+          password={password}
+        />
         <div className="btn_block">
           <div
             className={
