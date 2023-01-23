@@ -2,41 +2,51 @@ import { FC } from "react";
 import { useAuthorization } from "../../hooks/auth-user";
 import { useField } from "../../hooks/validation";
 import { NavLink } from "react-router-dom";
-import { Button } from "@mui/material";
-import authImg from "./../../images/authImg.png";
-import styled from "styled-components";
 import TitleBlock from "./TitleBlock";
 import InputsBlock from "./InputsBlock";
+import BtnBlock from "./BtnBlock";
+import authImg from "./../../images/authImg.png";
+import styled from "styled-components";
+import varibles from "./../../scss/varibles.scss";
+import { useAppSelector } from "../../hooks/redux-hooks";
 
 const WrapperForm = styled.div`
   background-color: var(--color-active);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow-y: scroll;
-  & > div {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 40px;
-    width: 50%;
-    .btn_block {
-      text-align: center;
-      button {
-        width: 300px;
-        padding: 8px;
-        margin: 10px 0;
-      }
-    }
-    .disabled {
-      cursor: not-allowed;
-    }
-  }
+  padding: 40px 0;
   .img_block {
-    background-color: transparent;
-    width: 300px;
+    width: 40%;
+    margin-right: -15%;
+    z-index: 99;
+    & > div {
+      margin-top: 50px;
+    }
     img {
       width: 100%;
+    }
+  }
+  .form_paper {
+    min-height: 70vh;
+    background-color: #ffffff;
+    border-radius: 20px;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    & > div {
+      width: 70%;
+    }
+    .link_block {
+      text-align: center;
+    }
+    .error_auth {
+      color: #ff0000;
+      font-size: 12px;
+      margin-top: 20px;
     }
   }
 `;
@@ -47,7 +57,11 @@ interface FormProps {
   title: string;
   subTitle: string;
   textLink: string;
-  handleClick: (email: string, password: string) => void;
+  handleClick: (
+    email: string,
+    password: string,
+    userName?: string | undefined
+  ) => void;
 }
 
 const Form: FC<FormProps> = ({
@@ -76,54 +90,42 @@ const Form: FC<FormProps> = ({
     minLength: 3,
     maxLength: 25,
   });
-
+  // const { error }: any = useAppSelector((state) => state.user.error);
   const { googleAuth } = useAuthorization();
-  console.log(email);
+  const { error } = useAppSelector((state) => state.user);
 
   return (
     <WrapperForm>
       <div className="img_block">
-        <img src={authImg} alt="Doot" />
+        <div>
+          <h1>Doot</h1>
+        </div>
+        <div>
+          <img src={authImg} alt="Doot" />
+        </div>
       </div>
-      <div>
-        <TitleBlock title={title} subTitle={subTitle} />
-        <div className="error_auth"></div>
-        <InputsBlock
-          title={title}
-          fullName={fullName}
-          email={email}
-          password={password}
-        />
-        <div className="btn_block">
-          <div
-            className={
-              !(email.validInput && password.validInput) ? "disabled" : ""
-            }
-          >
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "var(--color-active)",
-              }}
-              onClick={() => handleClick(email.value, password.value)}
-              disabled={!(email.validInput && password.validInput)}
-            >
-              {title}
-            </Button>
+      <div className="form_paper">
+        <div>
+          <TitleBlock title={title} subTitle={subTitle} />
+          <div className="error_auth">
+            {error && "Не корректно введены данные!"}
           </div>
-          <div>
-            <Button
-              variant="outlined"
-              style={{
-                borderColor: "var(--color-active)",
-                color: "var(--color-active)",
-              }}
-              onClick={googleAuth}
-            >
-              Google
-            </Button>
-          </div>
-          <div>
+          <InputsBlock
+            title={title}
+            fullName={fullName}
+            email={email}
+            password={password}
+          />
+
+          <BtnBlock
+            email={email}
+            password={password}
+            googleAuth={googleAuth}
+            title={title}
+            handleClick={handleClick}
+            fullName={fullName}
+          />
+          <div className="link_block">
             {textLink}
             <NavLink to={path}>{nameLink}</NavLink>
           </div>

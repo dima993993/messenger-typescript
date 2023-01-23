@@ -12,6 +12,7 @@ export type SettingsField = {
     maxLengthError: boolean,
     minLengthError: boolean,
     value: string,
+    validInput: boolean,
     onBlur: () => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeError: (nameField: string, allSettings: SettingsField) => string;

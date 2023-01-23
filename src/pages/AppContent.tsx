@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth-user";
 import { useAppDispatch } from "../hooks/redux-hooks";
@@ -8,6 +9,9 @@ const AppContent = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { isAuth, email } = useAuth();
+  const auth = getAuth();
+  console.log(auth);
+
   useEffect(() => {
     if (isAuth) {
       navigate("/");

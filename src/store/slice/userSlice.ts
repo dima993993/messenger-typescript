@@ -4,8 +4,7 @@ const initialState = {
     email: null,
     token: null,
     id: null,
-    displayName: null,
-    photoURL: null,
+    error: false,
 }
 const userSlice = createSlice({
     name: "user",
@@ -20,9 +19,12 @@ const userSlice = createSlice({
             state.email = null;
             state.token = null;
             state.id = null;
+        },
+        checkError(state, action) {
+            state.error = action.payload.error;
         }
     }
 })
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, checkError } = userSlice.actions;
 export default userSlice.reducer;

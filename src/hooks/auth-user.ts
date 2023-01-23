@@ -3,10 +3,11 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup 
+  signInWithPopup,
+  updateProfile,
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../store/slice/userSlice';
+import { setUser, checkError } from '../store/slice/userSlice';
 import { useAppDispatch, useAppSelector } from './redux-hooks';
 
 
@@ -23,24 +24,34 @@ export const useAuth = () => {
 export const useAuthorization = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const auth = getAuth();
+  const auth: any = getAuth();
+  
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
+      .then(({ user }) => {    
         dispatch(
           setUser({
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
-          })
+          }),
         );
+        dispatch(checkError({
+          error: false,
+        }))
         navigate("/");
       })
-      .catch(console.error);
+      .catch(() => {
+        dispatch(checkError({
+          error: true,
+        }))  
+      });
+      
   };
-  const handleRegistration = (email: string, password: string) => {
+  const handleRegistration = (email: string, password: string, userName: string | undefined) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+        updateProfile(auth.currentUser, {displayName: userName})
         dispatch(
           setUser({
             email: user.email,
@@ -48,9 +59,16 @@ export const useAuthorization = () => {
             id: user.uid,
           })
         );
+        dispatch(checkError({
+          error: false,
+        })) 
         navigate("/");
       })
-      .catch(console.error);
+      .catch(() => {
+        dispatch(checkError({
+          error: true,
+        })) 
+      });
   };
   const provider = new GoogleAuthProvider();
   const googleAuth = () => {
@@ -65,10 +83,12 @@ export const useAuthorization = () => {
         );
         navigate("/");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error) => { 
+          
       });
   };
+ 
+  
   return {
     handleLogin,
     handleRegistration,

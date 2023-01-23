@@ -4,7 +4,7 @@ import { SettingsField } from "../../types/types";
 import Field from "./Field";
 
 const WrapperInputsBlock = styled.div`
-  margin: 60px auto 0px auto;
+  margin: 20px auto 0px auto;
   width: 300px;
 `;
 interface IInputsBlock {
