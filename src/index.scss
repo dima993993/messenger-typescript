@@ -3,15 +3,35 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Arial", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
-  --color-active: #4EAC6D;
   // Size Element
+  --h-page: 100vh;
+  --s-nav: 70px;
+  --w-aside: 300px;
+  --h-header: 100px;
+  --w-user-info: 350px;
+  --w-user-info-dif: -350px;
+  // Theme Settings
+  --color-active: #4eac6d;
+  --color-text-active: #ffffff;
+  --color-nav: #2E2E2E;
+  --color-nav-text: #8F9198;
+  --color-sub-active: rgba(78, 172, 109, 0.7);
 }
-body[data-theme="dark"] {}
+body[data-theme="dark"] {
+  --color-primary: #262626;
+  --color-secondary: #2F3330;
+  --color-input: #2E2E2E;
+  --color-text: #ADB5BD;
+  --color-sub-text: #8C8D8D;
+}
 body[data-theme="light"] {
+  --color-primary: #ffffff;
+  --color-secondary: #E3ECE6;
+  --color-input: #F6F6F9;
   --color-text: #495057;
   --color-sub-text: #797C8C;
 }

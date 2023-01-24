@@ -1,21 +1,22 @@
 import { useEffect } from "react";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Aside from "../components/aside/Aside";
+import Navigation from "../components/navigation/Navigation";
+import UserInfo from "../components/user-info/UserInfo";
 import { useAuth } from "../hooks/auth-user";
-import { useAppDispatch } from "../hooks/redux-hooks";
-import { removeUser } from "../store/slice/userSlice";
 
 const WrapperAppContent = styled.div`
+  height: var(--h-page);
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-around;
+  overflow-x: hidden;
 `;
 
 const AppContent = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { isAuth, email } = useAuth();
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     if (isAuth) {
@@ -31,19 +32,10 @@ const AppContent = () => {
   }, [isAuth]);
   return (
     <WrapperAppContent>
-      <div>
-        <div>Nav Bar</div>
-        <div>
-          <button onClick={() => dispatch(removeUser())}>
-            Log Out {email}
-          </button>
-        </div>
-      </div>
-      <div>Aside</div>
-      <div>
-        <Outlet />
-      </div>
-      <div>User Info</div>
+      <Navigation />
+      <Aside />
+      <Outlet />
+      <UserInfo />
     </WrapperAppContent>
   );
 };

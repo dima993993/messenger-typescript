@@ -1,21 +1,22 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import MessagesContainer from "./components/messages/MessagesContainer";
 import AppContent from "./pages/AppContent";
 import LoginPage from "./pages/LoginPage";
-import Messages from "./pages/Messages";
 import RegisterPage from "./pages/RegisterPage";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<AppContent />}>
-          <Route path="dialog/:id" element={<Messages />} />
+          <Route index element={<div>Choose Dialog</div>} />
+          <Route path="dialog/:id" element={<MessagesContainer />} />
         </Route>
         <Route path="/authorization" element={<LoginPage />} />
         <Route path="/registration" element={<RegisterPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </div>
+    </>
   );
 };
 
