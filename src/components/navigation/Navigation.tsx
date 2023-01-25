@@ -1,10 +1,12 @@
 import { Avatar, SvgIcon, Tooltip } from "@mui/material";
 import styled from "styled-components";
 import { menuItems } from "../../data/navigation";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { useAppDispatch } from "../../hooks/redux-hooks";
-import { removeUser } from "../../store/slice/userSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { removeUser } from "../../store/slice/authSlice";
 import { useAuth } from "../../hooks/auth-user";
+import { switchTheme } from "../../store/slice/themeSlice";
+import Theme from "./Theme";
+import { switchNavBar } from "../../store/slice/supportSlice";
 
 const WrapperNavigation = styled.div`
   background-color: var(--color-nav);
@@ -31,6 +33,9 @@ const WrapperNavigation = styled.div`
     & > * {
       font-size: 30px;
     }
+    .active {
+      color: var(--color-active);
+    }
   }
   .avatar_block {
     width: var(--s-nav);
@@ -42,7 +47,10 @@ const WrapperNavigation = styled.div`
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
+  const { currentTheme } = useAppSelector((state) => state.theme);
+  const { navSwitcher } = useAppSelector((state) => state.support);
   const { email } = useAuth();
+
   return (
     <WrapperNavigation>
       <div className="icon_block">
@@ -54,17 +62,17 @@ const Navigation = () => {
             placement="right"
           >
             <div className="icon">
-              <SvgIcon component={iconElement.icon} />
+              <SvgIcon
+                component={iconElement.icon}
+                onClick={() => dispatch(switchNavBar(iconElement.id))}
+                className={navSwitcher === iconElement.id ? "active" : ""}
+              />
             </div>
           </Tooltip>
         ))}
       </div>
       <div className="avatar_block">
-        <Tooltip title="Dark-mode" arrow placement="right">
-          <div className="icon">
-            <SvgIcon component={DarkModeOutlinedIcon} />
-          </div>
-        </Tooltip>
+        <Theme currentTheme={currentTheme} switchTheme={switchTheme} />
         <div className="icon" onClick={() => dispatch(removeUser())}>
           <Tooltip title={`Log Out ${email}`} arrow placement="right">
             <Avatar />

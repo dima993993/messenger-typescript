@@ -2,9 +2,7 @@ import styled from "styled-components";
 import Dialog from "./Dialog";
 import HeaderDialogs from "./HeaderDialogs";
 
-const WrapperDialogs = styled.div`
-  background-color: var(--color-primary);
-`;
+const WrapperDialogs = styled.div``;
 const listDialogs = [
   { id: 1, name: "Misha" },
   { id: 2, name: "Kolya" },

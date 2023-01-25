@@ -16,8 +16,8 @@ const listMessages = [
 const Messages = () => {
   return (
     <WrapperMessages>
-      {listMessages.map((message) => (
-        <Message key={message.id} message={message} />
+      {listMessages.map((message, index) => (
+        <Message key={index} message={message} />
       ))}
     </WrapperMessages>
   );

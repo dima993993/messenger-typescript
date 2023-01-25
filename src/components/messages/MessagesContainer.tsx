@@ -4,7 +4,7 @@ import Messages from "./Messages";
 import Pattern from "./../../images/pattern.png";
 import MessagesHeader from "./MessagesHeader";
 
-const WrapperMessagesContainer = styled.div`
+export const WrapperMessagesContainer = styled.div`
   width: 100%;
   background-color: var(--color-secondary);
   background-image: url(${Pattern});

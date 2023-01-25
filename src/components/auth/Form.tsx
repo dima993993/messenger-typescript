@@ -90,9 +90,8 @@ const Form: FC<FormProps> = ({
     minLength: 3,
     maxLength: 25,
   });
-  // const { error }: any = useAppSelector((state) => state.user.error);
   const { googleAuth } = useAuthorization();
-  const { error } = useAppSelector((state) => state.user);
+  const { error } = useAppSelector((state) => state.auth);
 
   return (
     <WrapperForm>

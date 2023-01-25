@@ -24,6 +24,7 @@ const WrapperHeaderDialogs = styled.div`
       padding: 10px;
       border-radius: 5px;
       width: 80%;
+      color: var(--color-text);
     }
     & > div {
       display: flex;
@@ -31,6 +32,7 @@ const WrapperHeaderDialogs = styled.div`
       cursor: pointer;
       & > * {
         font-size: 18px;
+        color: var(--color-sub-text);
       }
     }
   }

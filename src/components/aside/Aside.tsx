@@ -1,16 +1,30 @@
 import React from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../../hooks/redux-hooks";
 import Dialogs from "./dialogs/Dialogs";
+import Profile from "./profile/Profile";
 
 const WrapperAside = styled.div`
   width: var(--w-aside);
+  background-color: var(--color-primary);
   flex-shrink: 0;
 `;
 
 const Aside = () => {
+  const { navSwitcher } = useAppSelector((state) => state.support);
+  const switchAside = (id: number) => {
+    switch (id) {
+      case 1:
+        return <Dialogs />;
+      case 2:
+        return <Profile />;
+      default:
+        return <Dialogs />;
+    }
+  };
   return (
     <WrapperAside>
-      <Dialogs />
+      <>{switchAside(navSwitcher)}</>
     </WrapperAside>
   );
 };

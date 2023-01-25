@@ -3,6 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { toggleUserInfoPanel } from "../../store/slice/supportSlice";
 
 const WrapperMessagesHeader = styled.div`
   padding: 20px;
@@ -10,6 +12,7 @@ const WrapperMessagesHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: var(--color-secondary);
+  position: sticky;
   .profile {
     cursor: pointer;
     display: flex;
@@ -37,9 +40,16 @@ const WrapperMessagesHeader = styled.div`
 `;
 
 const MessagesHeader = () => {
+  const dispatch = useAppDispatch();
+  const { userInfoPanel } = useAppSelector((state) => state.support);
   return (
     <WrapperMessagesHeader>
-      <div className="profile">
+      <div
+        className="profile"
+        onClick={() =>
+          dispatch(toggleUserInfoPanel(true)) && console.log(userInfoPanel)
+        }
+      >
         <div>
           <Avatar />
         </div>

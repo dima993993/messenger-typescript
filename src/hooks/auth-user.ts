@@ -7,12 +7,12 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { setUser, checkError } from '../store/slice/userSlice';
+import { setUser, checkError } from '../store/slice/authSlice';
 import { useAppDispatch, useAppSelector } from './redux-hooks';
 
 
 export const useAuth = () => {
-  const { email, token, id } = useAppSelector((state) => state.user);
+  const { email, token, id } = useAppSelector((state) => state.auth);
   return {
     isAuth: !!email,
     token,
@@ -28,17 +28,20 @@ export const useAuthorization = () => {
   
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {    
+      .then(({ user }) => {  
+        console.log(user);
+          
         dispatch(
           setUser({
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
+            userInfo: user.providerData[0],
           }),
         );
         dispatch(checkError({
           error: false,
-        }))
+        }));
         navigate("/");
       })
       .catch(() => {
@@ -57,6 +60,7 @@ export const useAuthorization = () => {
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
+            userInfo: user.providerData[0],
           })
         );
         dispatch(checkError({
@@ -79,6 +83,7 @@ export const useAuthorization = () => {
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
+            userInfo: user.providerData[0],
           })
         );
         navigate("/");
