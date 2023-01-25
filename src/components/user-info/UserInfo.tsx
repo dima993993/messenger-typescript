@@ -6,7 +6,6 @@ import { toggleUserInfoPanel } from "../../store/slice/supportSlice";
 const WrapperUserInfo = styled.div`
   background-color: var(--color-primary);
   width: var(--w-user-info);
-  border: 1px solid red;
   flex-shrink: 0;
   transition: margin 0.5s;
   .close_icon {

@@ -17,3 +17,12 @@ export type SettingsField = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeError: (nameField: string, allSettings: SettingsField) => string;
 }
+
+export type UserInfo= {
+    displayName: string | null,
+    email: string | null,
+    phoneNumber: string | null,
+    photoURL: string | null,
+    providerId: string | null,
+    uid: string | null,
+}

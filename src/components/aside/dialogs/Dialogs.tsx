@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Dialog from "./Dialog";
-import HeaderDialogs from "./HeaderDialogs";
+import HeaderAside from "../HeaderAside";
 
 const WrapperDialogs = styled.div``;
 const listDialogs = [
@@ -15,7 +15,7 @@ const listDialogs = [
 const Dialogs = () => {
   return (
     <WrapperDialogs>
-      <HeaderDialogs />
+      <HeaderAside />
       <div>
         {listDialogs.map((dialog) => (
           <Dialog key={dialog.id} dialog={dialog} />

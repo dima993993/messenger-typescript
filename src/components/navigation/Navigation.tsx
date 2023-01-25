@@ -1,12 +1,12 @@
 import { Avatar, SvgIcon, Tooltip } from "@mui/material";
-import styled from "styled-components";
 import { menuItems } from "../../data/navigation";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { removeUser } from "../../store/slice/authSlice";
 import { useAuth } from "../../hooks/auth-user";
 import { switchTheme } from "../../store/slice/themeSlice";
-import Theme from "./Theme";
 import { switchNavBar } from "../../store/slice/supportSlice";
+import Theme from "./Theme";
+import styled from "styled-components";
 
 const WrapperNavigation = styled.div`
   background-color: var(--color-nav);
@@ -30,6 +30,7 @@ const WrapperNavigation = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
     & > * {
       font-size: 30px;
     }
@@ -49,33 +50,38 @@ const Navigation = () => {
   const dispatch = useAppDispatch();
   const { currentTheme } = useAppSelector((state) => state.theme);
   const { navSwitcher } = useAppSelector((state) => state.support);
+  const { userInfo }: any = useAppSelector((state) => state.auth);
   const { email } = useAuth();
 
   return (
     <WrapperNavigation>
       <div className="icon_block">
-        {menuItems.map((iconElement) => (
-          <Tooltip
-            title={iconElement.title}
-            key={iconElement.id}
-            arrow
-            placement="right"
-          >
-            <div className="icon">
-              <SvgIcon
-                component={iconElement.icon}
+        {menuItems.map((iconElement) => {
+          return (
+            <Tooltip
+              title={iconElement.title}
+              key={iconElement.id}
+              arrow
+              placement="right"
+            >
+              <div
+                className="icon"
                 onClick={() => dispatch(switchNavBar(iconElement.id))}
-                className={navSwitcher === iconElement.id ? "active" : ""}
-              />
-            </div>
-          </Tooltip>
-        ))}
+              >
+                <SvgIcon
+                  component={iconElement.icon}
+                  className={navSwitcher === iconElement.id ? "active" : ""}
+                />
+              </div>
+            </Tooltip>
+          );
+        })}
       </div>
       <div className="avatar_block">
         <Theme currentTheme={currentTheme} switchTheme={switchTheme} />
         <div className="icon" onClick={() => dispatch(removeUser())}>
           <Tooltip title={`Log Out ${email}`} arrow placement="right">
-            <Avatar />
+            <Avatar src={userInfo !== null ? userInfo.photoURL : ""} />
           </Tooltip>
         </div>
       </div>
