@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     userInfoPanel: false,
-    navSwitcher: 1,
+    navSwitcher: 'chats',
 }
 const supportSlice = createSlice({
     name: "support",

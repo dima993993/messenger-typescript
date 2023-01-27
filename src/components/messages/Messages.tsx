@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Message from "./Message";
 
-const WrapperMessages = styled.div``;
+const WrapperMessages = styled.div`
+  width: 70%;
+  margin: 0 auto;
+`;
 
 const listMessages = [
   { id: 1, message: "Hello", date: "12.20.2021 13:45:36" },
@@ -14,10 +17,11 @@ const listMessages = [
 ];
 
 const Messages = () => {
+  let myId = 1;
   return (
     <WrapperMessages>
       {listMessages.map((message, index) => (
-        <Message key={index} message={message} />
+        <Message key={index} message={message} authUserId={myId} />
       ))}
     </WrapperMessages>
   );

@@ -12,11 +12,11 @@ const WrapperAside = styled.div`
 
 const Aside = () => {
   const { navSwitcher } = useAppSelector((state) => state.support);
-  const switchAside = (id: number) => {
+  const switchAside = (id: string) => {
     switch (id) {
-      case 1:
+      case "chats":
         return <Dialogs />;
-      case 2:
+      case "profile":
         return <Profile />;
       default:
         return <Dialogs />;

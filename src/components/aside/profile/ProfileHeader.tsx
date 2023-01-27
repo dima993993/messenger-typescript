@@ -5,8 +5,12 @@ import { UserInfo } from "../../../types/types";
 import profilePattern from "./../../../images/profilePattern.jpg";
 import EditIcon from "@mui/icons-material/Edit";
 const WrapperProfileHeader = styled.div`
+  border-bottom: 1px solid var(--color-secondary);
+  padding-bottom: 20px;
+  height: 30vh;
+  box-sizing: border-box;
   & > div:first-child {
-    height: 150px;
+    height: 60%;
     background-image: url(${profilePattern});
     background-repeat: no-repeat;
     background-position: center;
@@ -41,6 +45,7 @@ const WrapperProfileHeader = styled.div`
       color: var(--color-text);
       background-color: var(--color-primary);
       border-radius: 50%;
+
       & > * {
         font-size: 18px;
       }
@@ -48,9 +53,7 @@ const WrapperProfileHeader = styled.div`
   }
   & > div:last-child {
     text-align: center;
-    .avatar {
-      border: 1px solid red;
-    }
+
     .status {
       color: var(--color-sub-text);
       font-size: 12px;
@@ -70,8 +73,8 @@ const ProfileHeader: FC<IProfileHeader> = ({ userInfo }) => {
   return (
     <WrapperProfileHeader>
       <div>
-        <div className="title">My Profile</div>
-        <div className="edit">
+        <div className='title'>My Profile</div>
+        <div className='edit'>
           <SvgIcon component={EditIcon} />
         </div>
       </div>
@@ -80,8 +83,8 @@ const ProfileHeader: FC<IProfileHeader> = ({ userInfo }) => {
           src={userInfo.photoURL}
           sx={{ width: 70, height: 70, margin: "-40px auto 20px auto" }}
         />
-        <div className="name">{userInfo.displayName}</div>
-        <div className="status">Status</div>
+        <div className='name'>{userInfo.displayName}</div>
+        <div className='status'>Status</div>
       </div>
     </WrapperProfileHeader>
   );

@@ -17,7 +17,7 @@ const WrapperBtnBlock = styled.div`
       background-color: var(--color-active);
     }
   }
-  .btn_google {
+  .google_button {
     color: var(--color-active);
     border: 1px solid var(--color-active);
     &:hover {
@@ -53,21 +53,24 @@ const BtnBlock: FC<IBtnBlock> = ({
   return (
     <WrapperBtnBlock>
       <div
-        className={!(email.validInput && password.validInput) ? "disabled" : ""}
-      >
+        className={
+          !(email.validInput && password.validInput) ? "disabled" : ""
+        }>
         <Button
-          variant="contained"
+          variant='contained'
           onClick={() => {
             handleClick(email.value, password.value, fullName.value);
           }}
           disabled={!(email.validInput && password.validInput)}
-          className="btn_auth"
-        >
+          className='btn_auth'>
           {title}
         </Button>
       </div>
       <div>
-        <Button variant="outlined" onClick={googleAuth} className="btn_google">
+        <Button
+          variant='outlined'
+          onClick={googleAuth}
+          className='google_button'>
           Google
         </Button>
       </div>
