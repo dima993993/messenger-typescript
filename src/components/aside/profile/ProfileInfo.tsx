@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const WrapperProfileInfo = styled.div`
   box-sizing: border-box;
-  height: 70vh;
+  height: 60vh;
   overflow-y: scroll;
   color: var(--color-text);
   &::-webkit-scrollbar {

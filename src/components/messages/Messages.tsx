@@ -3,8 +3,21 @@ import styled from "styled-components";
 import Message from "./Message";
 
 const WrapperMessages = styled.div`
-  width: 70%;
-  margin: 0 auto;
+  height: calc(var(--h-page) - var(--h-header) - var(--h-message-field));
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+  }
+  & > div {
+    width: 70%;
+    margin: 0 auto;
+  }
 `;
 
 const listMessages = [
@@ -20,9 +33,11 @@ const Messages = () => {
   let myId = 1;
   return (
     <WrapperMessages>
-      {listMessages.map((message, index) => (
-        <Message key={index} message={message} authUserId={myId} />
-      ))}
+      <div>
+        {listMessages.map((message, index) => (
+          <Message key={index} message={message} authUserId={myId} />
+        ))}
+      </div>
     </WrapperMessages>
   );
 };

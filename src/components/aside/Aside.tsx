@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import Dialogs from "./dialogs/Dialogs";
 import Profile from "./profile/Profile";
+import SearchUsers from "./search-users/SearchUsers";
 
 const WrapperAside = styled.div`
   width: var(--w-aside);
@@ -18,6 +19,8 @@ const Aside = () => {
         return <Dialogs />;
       case "profile":
         return <Profile />;
+      case "search-users":
+        return <SearchUsers />;
       default:
         return <Dialogs />;
     }

@@ -7,7 +7,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { toggleUserInfoPanel } from "../../store/slice/supportSlice";
 
 const WrapperMessagesHeader = styled.div`
-  padding: 20px;
+  height: var(--h-header);
+  padding-left: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,7 +52,7 @@ const MessagesHeader = () => {
         }
       >
         <div>
-          <Avatar />
+          <Avatar>Д</Avatar>
         </div>
         <div className="name_block">
           <div>Name</div>

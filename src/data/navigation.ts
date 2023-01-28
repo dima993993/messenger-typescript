@@ -8,7 +8,7 @@ export const menuItems = [
     {id: "chats", title: 'Chats', icon: ChatOutlinedIcon, clickHandler: '...'},
     {id: "profile", title: 'Profile', icon: AccountCircleOutlinedIcon, clickHandler: '...'},
     {id: "contacts", title: 'Contacts', icon: PermContactCalendarOutlinedIcon, clickHandler: '...'},
-    {id: "search-contact", title: 'Search Contact', icon: PersonSearchOutlinedIcon, clickHandler: '...'},
+    {id: "search-users", title: 'Search Contact', icon: PersonSearchOutlinedIcon, clickHandler: '...'},
     {id: "favorite", title: 'Favorite', icon: StarOutlineOutlinedIcon, clickHandler: '...'},
     {id: "settings", title: 'Settings', icon: SettingsOutlinedIcon, clickHandler: '...'},
 ]

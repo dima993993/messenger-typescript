@@ -1,23 +1,21 @@
 import { Avatar, SvgIcon } from "@mui/material";
 import { FC } from "react";
 import styled from "styled-components";
-import { UserInfo } from "../../../types/types";
 import profilePattern from "./../../../images/profilePattern.jpg";
 import EditIcon from "@mui/icons-material/Edit";
 const WrapperProfileHeader = styled.div`
   border-bottom: 1px solid var(--color-secondary);
-  padding-bottom: 20px;
-  height: 30vh;
+  height: 40vh;
   box-sizing: border-box;
   & > div:first-child {
-    height: 60%;
+    height: 20vh;
     background-image: url(${profilePattern});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     color: var(--color-text-active);
     position: relative;
@@ -58,6 +56,7 @@ const WrapperProfileHeader = styled.div`
       color: var(--color-sub-text);
       font-size: 12px;
       margin-top: 10px;
+      padding-bottom: 10px;
     }
     .name {
       font-size: 18px;
@@ -73,8 +72,8 @@ const ProfileHeader: FC<IProfileHeader> = ({ userInfo }) => {
   return (
     <WrapperProfileHeader>
       <div>
-        <div className='title'>My Profile</div>
-        <div className='edit'>
+        <div className="title">My Profile</div>
+        <div className="edit">
           <SvgIcon component={EditIcon} />
         </div>
       </div>
@@ -82,9 +81,11 @@ const ProfileHeader: FC<IProfileHeader> = ({ userInfo }) => {
         <Avatar
           src={userInfo.photoURL}
           sx={{ width: 70, height: 70, margin: "-40px auto 20px auto" }}
-        />
-        <div className='name'>{userInfo.displayName}</div>
-        <div className='status'>Status</div>
+        >
+          {userInfo.displayName[0]}
+        </Avatar>
+        <div className="name">{userInfo.displayName}</div>
+        <div className="status">Status</div>
       </div>
     </WrapperProfileHeader>
   );

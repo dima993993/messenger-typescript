@@ -1,6 +1,6 @@
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { SvgIcon } from "@mui/material";
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 
 const WrapperHeaderDialogs = styled.div`
@@ -37,11 +37,14 @@ const WrapperHeaderDialogs = styled.div`
     }
   }
 `;
+interface IHeaderDialogs {
+  title: string;
+}
 
-const HeaderDialogs = () => {
+const HeaderDialogs: FC<IHeaderDialogs> = ({ title }) => {
   return (
     <WrapperHeaderDialogs>
-      <div className="title">Dialogs</div>
+      <div className="title">{title}</div>
       <div className="search">
         <input type="text" placeholder="Search" />
         <div>
