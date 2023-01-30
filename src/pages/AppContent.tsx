@@ -5,6 +5,7 @@ import Aside from "../components/aside/Aside";
 import Navigation from "../components/navigation/Navigation";
 import UserInfo from "../components/user-info/UserInfo";
 import { useAuth } from "../hooks/auth-user";
+import { useAppSelector } from "../hooks/redux-hooks";
 
 const WrapperAppContent = styled.div`
   height: var(--h-page);

@@ -18,7 +18,14 @@ const Dialogs = () => {
       <HeaderAside title="Dialogs" />
       <div>
         {listDialogs.map((dialog) => (
-          <UserItem key={dialog.id} item={dialog} symbol={null} />
+          <UserItem
+            key={dialog.id}
+            newMessage={dialog.newMessage}
+            userName={dialog.name}
+            uid={dialog.id}
+            photo={null}
+            symbol={null}
+          />
         ))}
       </div>
     </WrapperDialogs>

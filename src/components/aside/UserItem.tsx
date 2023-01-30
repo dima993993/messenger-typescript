@@ -35,37 +35,42 @@ const WrapperUserItem = styled.div`
     color: var(--color-text-active);
   }
 `;
-type UserItemInfo = {
-  id: number;
-  name: string;
-  newMessage?: number;
-};
+
 interface IUserItem {
-  item: UserItemInfo;
   symbol: string | null;
+  uid: number | string;
+  photo: string | null;
+  userName: string;
+  newMessage?: number;
 }
-const UserItem: FC<IUserItem> = ({ item, symbol }) => {
+const UserItem: FC<IUserItem> = ({
+  uid,
+  photo,
+  userName,
+  symbol,
+  newMessage,
+}) => {
   return (
     <WrapperUserItem>
-      <NavLink to={`dialog/${item.id}`}>
+      <NavLink to={`dialog/${uid}`}>
         <div className="dialog">
           <div>
             <div>
-              <Avatar sx={{ width: 30, height: 30 }}>{item.name[0]}</Avatar>
+              <Avatar src={photo ? photo : ""} sx={{ width: 30, height: 30 }}>
+                {userName[0]}
+              </Avatar>
             </div>
-            <div className="user_name">{item.name}</div>
+            <div className="user_name">{userName}</div>
           </div>
           <div>
             {!symbol ? (
               <div
                 className="symbol"
                 style={
-                  item.newMessage === 0
-                    ? { display: "none" }
-                    : { display: "block" }
+                  newMessage === 0 ? { display: "none" } : { display: "block" }
                 }
               >
-                {item.newMessage}
+                {newMessage}
               </div>
             ) : (
               <div className="symbol">{symbol}</div>

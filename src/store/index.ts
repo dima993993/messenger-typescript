@@ -19,13 +19,13 @@ const rootReducer = combineReducers({
   auth: authSlice,
   support: supportSlice,
   theme: themeSlice,
-  users: userSlice,
+  user: userSlice,
 })
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'theme']
+  whitelist: ['auth', 'theme', "user"]
 }
 
 const persistedReducer = persistReducer(persistConfig,rootReducer)
@@ -39,7 +39,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-});
+  });
 export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;

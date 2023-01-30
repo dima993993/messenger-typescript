@@ -8,8 +8,9 @@ import {
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { setUser, checkError } from '../store/slice/authSlice';
+import { getUsers } from '../store/slice/userSlice';
+import { addUser, getUsersData } from './create-user';
 import { useAppDispatch, useAppSelector } from './redux-hooks';
-
 
 export const useAuth = () => {
   const { email, token, id } = useAppSelector((state) => state.auth);
@@ -28,20 +29,22 @@ export const useAuthorization = () => {
   
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {  
-        console.log(user);
-          
+      .then(({ user }) => {   
         dispatch(
           setUser({
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
-            userInfo: user.providerData[0],
           }),
         );
         dispatch(checkError({
           error: false,
         }));
+        getUsersData(user.uid).then(data => dispatch(getUsers({
+          allUsers: data.allUsers,
+          authUser: data.authUser[0]
+        }))
+        );  
         navigate("/");
       })
       .catch(() => {
@@ -49,23 +52,28 @@ export const useAuthorization = () => {
           error: true,
         }))  
       });
-      
   };
   const handleRegistration = (email: string, password: string, userName: string | undefined) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        updateProfile(auth.currentUser, {displayName: userName})
         dispatch(
           setUser({
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
-            userInfo: user.providerData[0],
           })
         );
         dispatch(checkError({
           error: false,
         })) 
+        addUser(user.uid, user.providerData[0], userName);
+        getUsersData(user.uid).then(data => dispatch(getUsers({
+          allUsers: data.allUsers,
+          authUser: data.authUser[0]
+        }))
+        ); 
+        
+        
         navigate("/");
       })
       .catch(() => {
@@ -83,9 +91,14 @@ export const useAuthorization = () => {
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
-            userInfo: user.providerData[0],
           })
         );
+        addUser(user.uid, user.providerData[0], user.providerData[0].displayName);
+        getUsersData(user.uid).then(data => dispatch(getUsers({
+          allUsers: data.allUsers,
+          authUser: data.authUser[0]
+        }))
+        ); 
         navigate("/");
       })
       .catch((error) => { 

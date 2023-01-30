@@ -3,6 +3,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import profilePattern from "./../../../images/profilePattern.jpg";
 import EditIcon from "@mui/icons-material/Edit";
+import { TAuthUser } from "../../../types/types";
 const WrapperProfileHeader = styled.div`
   border-bottom: 1px solid var(--color-secondary);
   height: 40vh;
@@ -65,10 +66,11 @@ const WrapperProfileHeader = styled.div`
   }
 `;
 interface IProfileHeader {
-  userInfo: any;
+  photo: string;
+  userName: string;
+  status: string;
 }
-
-const ProfileHeader: FC<IProfileHeader> = ({ userInfo }) => {
+const ProfileHeader: FC<IProfileHeader> = ({ photo, userName, status }) => {
   return (
     <WrapperProfileHeader>
       <div>
@@ -79,12 +81,12 @@ const ProfileHeader: FC<IProfileHeader> = ({ userInfo }) => {
       </div>
       <div>
         <Avatar
-          src={userInfo.photoURL}
+          src={photo ? photo : ""}
           sx={{ width: 70, height: 70, margin: "-40px auto 20px auto" }}
         >
-          {userInfo.displayName[0]}
+          {userName[0]}
         </Avatar>
-        <div className="name">{userInfo.displayName}</div>
+        <div className="name">{userName}</div>
         <div className="status">Status</div>
       </div>
     </WrapperProfileHeader>

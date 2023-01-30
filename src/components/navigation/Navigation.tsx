@@ -50,8 +50,9 @@ const Navigation = () => {
   const dispatch = useAppDispatch();
   const { currentTheme } = useAppSelector((state) => state.theme);
   const { navSwitcher } = useAppSelector((state) => state.support);
-  const { userInfo }: any = useAppSelector((state) => state.auth);
+  const { authUser }: any = useAppSelector((state) => state.user);
   const { email } = useAuth();
+  console.log(authUser);
 
   return (
     <WrapperNavigation>
@@ -81,7 +82,7 @@ const Navigation = () => {
         <Theme currentTheme={currentTheme} switchTheme={switchTheme} />
         <div className="icon" onClick={() => dispatch(removeUser())}>
           <Tooltip title={`Log Out ${email}`} arrow placement="right">
-            <Avatar src={userInfo !== null ? userInfo.photoURL : ""} />
+            <Avatar>{"N"}</Avatar>
           </Tooltip>
         </div>
       </div>

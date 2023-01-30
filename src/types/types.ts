@@ -18,11 +18,16 @@ export type SettingsField = {
     changeError: (nameField: string, allSettings: SettingsField) => string;
 }
 
-export type UserInfo= {
-    displayName: string | null,
-    email: string | null,
-    phoneNumber: string | null,
-    photoURL: string | null,
-    providerId: string | null,
-    uid: string | null,
+export type TAuthUser= {
+    uid: string,
+    name: string,
+    phone: string | null,
+    photo: string | null,
+    email: string,
+    status: string | null,
+    aboutUser: string | null,
+    location: string | null,
+    contacts: any,
+    dialogs: any,
+    media: any,
 }

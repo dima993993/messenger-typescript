@@ -53,24 +53,25 @@ const BtnBlock: FC<IBtnBlock> = ({
   return (
     <WrapperBtnBlock>
       <div
-        className={
-          !(email.validInput && password.validInput) ? "disabled" : ""
-        }>
+        className={!(email.validInput && password.validInput) ? "disabled" : ""}
+      >
         <Button
-          variant='contained'
+          variant="contained"
           onClick={() => {
             handleClick(email.value, password.value, fullName.value);
           }}
           disabled={!(email.validInput && password.validInput)}
-          className='btn_auth'>
+          className="btn_auth"
+        >
           {title}
         </Button>
       </div>
       <div>
         <Button
-          variant='outlined'
+          variant="outlined"
           onClick={googleAuth}
-          className='google_button'>
+          className="google_button"
+        >
           Google
         </Button>
       </div>
