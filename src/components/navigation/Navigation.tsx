@@ -52,7 +52,6 @@ const Navigation = () => {
   const { navSwitcher } = useAppSelector((state) => state.support);
   const { authUser }: any = useAppSelector((state) => state.user);
   const { email } = useAuth();
-  console.log(authUser);
 
   return (
     <WrapperNavigation>

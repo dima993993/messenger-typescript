@@ -5,14 +5,9 @@ import { getUsers } from '../store/slice/userSlice';
 
 
 export const addUser = async (id: any, userInfo: any, userName: any) => {
-  // const users = await getDocs(collection(db, 'users'));
-  // const array: any = [];
-  // users.forEach((doc) => {
-  //     array.push(doc.data())
-  // });
-  // const currentUser = array.filter((user:any) => user.uid === id
-  // );
-  // if(currentUser.length !== 0) return null;
+  const users = await getDocs(collection(db, 'users'));
+  users.forEach((user) => console.log(user.data().uid === id)
+  )
   
     try {
         const docRef = await addDoc(collection(db, "users"), {

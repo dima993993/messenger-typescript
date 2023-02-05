@@ -40,11 +40,6 @@ export const useAuthorization = () => {
         dispatch(checkError({
           error: false,
         }));
-        getUsersData(user.uid).then(data => dispatch(getUsers({
-          allUsers: data.allUsers,
-          authUser: data.authUser[0]
-        }))
-        );  
         navigate("/");
       })
       .catch(() => {
@@ -66,12 +61,6 @@ export const useAuthorization = () => {
         dispatch(checkError({
           error: false,
         })) 
-        addUser(user.uid, user.providerData[0], userName);
-        getUsersData(user.uid).then(data => dispatch(getUsers({
-          allUsers: data.allUsers,
-          authUser: data.authUser[0]
-        }))
-        ); 
         
         
         navigate("/");
@@ -93,12 +82,6 @@ export const useAuthorization = () => {
             id: user.uid,
           })
         );
-        addUser(user.uid, user.providerData[0], user.providerData[0].displayName);
-        getUsersData(user.uid).then(data => dispatch(getUsers({
-          allUsers: data.allUsers,
-          authUser: data.authUser[0]
-        }))
-        ); 
         navigate("/");
       })
       .catch((error) => { 
